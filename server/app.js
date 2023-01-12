@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const dbconnect = require("./config/connection");
 const bodyParser = require('body-parser');
-const passport = require('passport');
 const dotenv = require("dotenv");
 const userRouter = require("./routes/userRouter")
 const adminRouter = require("./routes/adminRouter")
@@ -13,7 +12,6 @@ dotenv.config()
 
 
 app.use(cors());
-app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

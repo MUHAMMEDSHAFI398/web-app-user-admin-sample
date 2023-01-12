@@ -1,6 +1,5 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const passport = require("passport");
 const validateRegisterInput = require('../validation/signup');
 const validateLoginInput = require('../validation/login');
 const User = require("../model/userModal")

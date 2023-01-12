@@ -1,14 +1,13 @@
 import React,{useState} from 'react';
-import axios from '../../axios';
+import axios from '../../../axios'
 import {useNavigate} from "react-router-dom"
-
 
 function Signup() {
     const initialVlaues = { name: "", email: "", password: "", confirmPassword: "" };
     const [formValues, setFormValues] = useState(initialVlaues);
     const [errors,setErrors] = useState({});
     const navigate = useNavigate();
-
+    
     const onChangeHandle = (e) => {
        
         const { name, value } = e.target;
@@ -33,15 +32,15 @@ function Signup() {
         })
         
     }
-   
 
     return (
        
         <div className="mt-5" >
             <div className="container border w-25" >
-            <form className="mt-5" onSubmit={handleSubmit} >
-            <h2 className='d-flex justify-content-center' >Signup</h2>
+            <h2 className='d-flex justify-content-center' >Add user</h2>
 
+            <form className="mt-5" onSubmit={handleSubmit} >
+                
                 <div className="form-group mt-5">
                     <input
                     type="text"
