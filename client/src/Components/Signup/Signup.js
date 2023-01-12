@@ -1,6 +1,8 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import axios from '../../axios';
 import {useNavigate} from "react-router-dom"
+import { useSelector } from 'react-redux';
+
 
 
 function Signup() {
@@ -8,6 +10,7 @@ function Signup() {
     const [formValues, setFormValues] = useState(initialVlaues);
     const [errors,setErrors] = useState({});
     const navigate = useNavigate();
+    const auth = useSelector(state=>state); 
 
     const onChangeHandle = (e) => {
        
@@ -33,6 +36,15 @@ function Signup() {
         })
         
     }
+    useEffect(()=>{
+        console.log(auth);
+        console.log(auth.token);
+        console.log(auth.token.token);
+        if(auth.token.token !== ''){
+            navigate('/');
+        }
+
+    },[])
    
 
     return (

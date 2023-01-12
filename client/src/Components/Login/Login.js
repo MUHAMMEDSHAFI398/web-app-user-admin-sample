@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useState ,useEffect} from 'react'
 import axios from '../../axios';
 import {useNavigate} from "react-router-dom";
+
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreaters } from '../../State/index';
 
 function Login() {
     const initialVlaues = { email: "", password: "" };
     const [formValues, setFormValues] = useState(initialVlaues);
     const navigate = useNavigate();
     const [errors,setErrors] = useState({});
+
+    const auth = useSelector(state=>state); 
+    const dispatch = useDispatch();
+    const {storeToken} = bindActionCreators(actionCreaters,dispatch);
 
 
     const onChangeHandle = (e) => {
@@ -21,6 +30,11 @@ function Login() {
             password: formValues.password,
         }).then((response)=>{
             console.log(response.data);
+            const data ={
+                token:response.data.token,
+                id:response.data.id
+            }
+            storeToken(data);
             navigate('/');
         }).catch((error)=>{
             console.log(error.response.data); 
@@ -28,6 +42,12 @@ function Login() {
             console.log(errors);
         })
     }
+    useEffect(()=>{
+        if(auth.token.token !== ''){
+            navigate('/');
+        }
+
+    },[])
     return (
         <div className="mt-5" >
             <div className="container border w-25" >
