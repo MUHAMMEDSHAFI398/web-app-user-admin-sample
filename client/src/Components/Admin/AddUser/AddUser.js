@@ -24,7 +24,7 @@ function Signup() {
             password_confirm: formValues.confirmPassword 
         }).then((response)=>{
             console.log(response.data);
-            navigate('/');
+            navigate('/admin/home');
         }).catch((error)=>{
             console.log(error.response.data);
             setErrors(error.response.data);

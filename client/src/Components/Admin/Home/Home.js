@@ -3,12 +3,24 @@ import axios from '../../../axios';
 import { Link } from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { actionCreaters } from '../../../State/index';
+
 
 function Home() {
     const [users, setUsers] = useState([]);
     const [search, setsearch] = useState("");
     const [filteredDocs, setFilteredDocs] = useState([]);
-      const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const details = useSelector(state=>state); 
+    console.log(details);
+  const dispatch = useDispatch();
+  const {addData,removeToken} = bindActionCreators(actionCreaters,dispatch);
+
+      
 
     useEffect(() => {
         axios.get('http://localhost:5000/admin/getUsers').then((response) => {
@@ -25,6 +37,16 @@ function Home() {
         console.log(id);
         axios.get(`http://localhost:5000/admin/deleteUser/${id}`).then((reaponse) => {
             console.log(reaponse);
+            axios.get('http://localhost:5000/admin/getUsers').then((response) => {
+                console.log(response.data);
+                if (response.data.status) {
+                    setUsers(response.data.Users);
+    
+                } else {
+                    console.log(response);
+                }
+            })
+            
         })
     }
     const handleChange = (event) => {
@@ -39,11 +61,30 @@ function Home() {
         }
       };
 
+      const handleLogout = ()=>{
+        const data = {
+          token:"",
+          id:""
+        }
+        removeToken(data);
+        navigate('/admin');
+      }
+      
+
     return (
         <div class="table-responsive container">
+            <div className='d-flex justify-content-between'>
+
+            <Link to='/admin/adduser'>
             <a className='btn btn-success'>
-                <Link to='/admin/adduser'>Adduser</Link>
+                Adduser
             </a>
+            </Link>
+            <a onClick={handleLogout} className='btn btn-primary'>Logout</a>
+
+                
+            </div>
+           
             <div className="d-flex justify-content-end align-items-end pt-4">
                 <div className="search_div">
                     <input

@@ -8,6 +8,8 @@ import Login from './Components/Login/Login';
 import AdminHome from './Components/Admin/Home/Home'
 import AdminLogin from './Components/Admin/Login/AdminLogin';
 import AddUser from './Components/Admin/AddUser/AddUser';
+import EditUser from './Components/Admin/EditUser/EditUser';
+
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route exact path="/admin" element={ <AdminLogin/> } />
         <Route exact path="/admin/home" element={ <AdminHome/> } />
         <Route exact path="/admin/adduser" element={ <AddUser/> } />
+        <Route exact path="/admin/editUser" element={ <EditUser/> } />
+
 
         </Routes>
 

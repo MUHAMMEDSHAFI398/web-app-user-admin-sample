@@ -17,3 +17,17 @@ export const removeToken = (data)=>{
         })
     }
 }
+
+export const addData = (data) => {
+    console.log(data)
+    console.log('reached')
+    return (dispatch) => {
+      dispatch({
+        type: "addData",
+        id:data.id,
+        name:data.name,
+        email:data.email
+      });
+    };
+  };
+  

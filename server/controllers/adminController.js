@@ -56,5 +56,13 @@ module.exports = {
             });
         })
     },
-    
+    editUser: (req, res) => {
+        console.log(req.params.id);
+        User.findOne({ _id: req.params.id }).then((user) => {
+            console.log(user)
+            console.log('mannnnnn')
+
+          res.json({ user });
+        });
+      },
 }
